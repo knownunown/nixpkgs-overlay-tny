@@ -7,15 +7,17 @@
   };
 
   outputs = { nixpkgs, flake-utils, nixpkgs-fmt, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        devShell = pkgs.mkShell {
-          buildInputs = [ pkgs.pre-commit pkgs.nixpkgs-fmt ];
-        };
-        overlay = import ./overlay.nix { };
-        packages = import ./default.nix { inherit pkgs; };
-      });
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          devShell = pkgs.mkShell {
+            buildInputs = [ pkgs.pre-commit pkgs.nixpkgs-fmt ];
+          };
+          packages = import ./default.nix { inherit pkgs; };
+        }) // {
+      overlay = import ./overlay.nix { };
+    };
 }
