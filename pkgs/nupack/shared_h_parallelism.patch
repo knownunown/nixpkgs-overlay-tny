@@ -1,0 +1,29 @@
+--- a/include/nupack/execution/Shared.h
++++ b/include/nupack/execution/Shared.h
+@@ -6,7 +6,7 @@
+ #include <tbb/parallel_for.h>
+ #include <tbb/parallel_reduce.h>
+ #include "tbb/partitioner.h"
+-#include <tbb/task_scheduler_init.h>
++#include <tbb/global_control.h>
+ #include <tbb/cache_aligned_allocator.h>
+ #include <thread>
+ #include <atomic>
+@@ -27,14 +27,14 @@
+     struct State {
+         using simple_type = True;
+         State() = default;
+-        State(usize n) : contents(std::make_unique<tbb::task_scheduler_init const>(n)), max(n) {}
++        State(usize n) : contents(std::make_unique<tbb::global_control const>(tbb::global_control::parameter::max_allowed_parallelism, n)), max(n) {}
+
+-        std::unique_ptr<tbb::task_scheduler_init const> contents;
++        std::unique_ptr<tbb::global_control const> contents;
+         std::mutex mut;
+         usize max;
+
+         auto save_repr() const {return make_members(max);}
+-        void load_repr(usize m) {max = m; contents = std::make_unique<tbb::task_scheduler_init const>(max);}
++        void load_repr(usize m) {max = m; contents = std::make_unique<tbb::global_control const>(tbb::global_control::parameter::max_allowed_parallelism, max);}
+     };
+
+     SharedImpl(usize n=0) : state(std::make_shared<State>(n ? n : default_thread_number())) {}
