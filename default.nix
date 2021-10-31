@@ -4,4 +4,6 @@
   nupack = pkgs.callPackage ./pkgs/nupack { inherit tbb libsimdpp; };
 
   discord = pkgs.callPackage ./pkgs/overrides/discord.nix { };
+
+  git-credential-keepassxc = pkgs.callPackage ./pkgs/git-credential-keepassxc.nix { };
 }
