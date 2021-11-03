@@ -17,7 +17,7 @@
             buildInputs = [ pkgs.pre-commit pkgs.nixpkgs-fmt ];
           };
           packages = import ./default.nix { inherit pkgs; };
-        }) // {
-      overlay = import ./overlay.nix { };
+        }) // rec {
+      overlay = import ./overlay.nix;
     };
 }
