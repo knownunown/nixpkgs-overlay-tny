@@ -1,2 +1,2 @@
 final: prev:
-import ./default.nix { pkgs = final; }
+import ./default.nix { inherit final prev; }

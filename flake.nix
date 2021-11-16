@@ -16,7 +16,7 @@
           devShell = pkgs.mkShell {
             buildInputs = [ pkgs.pre-commit pkgs.nixpkgs-fmt ];
           };
-          packages = import ./default.nix { inherit pkgs; };
+          packages = import ./default.nix { final = pkgs; prev = pkgs; };
         }) // rec {
       overlay = import ./overlay.nix;
     };

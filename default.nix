@@ -1,9 +1,9 @@
-{ pkgs, ... }: rec {
-  tbb = pkgs.callPackage ./pkgs/tbb { };
+{ final, prev, pkgs ? final, ... }: rec {
+  tbb_2021 = pkgs.callPackage ./pkgs/tbb { };
   libsimdpp = pkgs.callPackage ./pkgs/libsimdpp { };
-  nupack = pkgs.callPackage ./pkgs/nupack { inherit tbb libsimdpp; };
+  nupack = pkgs.callPackage ./pkgs/nupack { inherit libsimdpp; tbb = tbb_2021; };
 
-  discord = pkgs.callPackage ./pkgs/overrides/discord.nix { };
+  discord = prev.callPackage ./pkgs/overrides/discord.nix { discord = prev.discord; };
 
   git-credential-keepassxc = pkgs.callPackage ./pkgs/git-credential-keepassxc.nix { };
 }
