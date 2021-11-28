@@ -23,8 +23,9 @@
 # "other compilers are generally unsupported"
 let
   python3 = python38;
+  stdenv = clangStdenv;
 in
-clangStdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "nupack";
   version = "4.0.0.27";
 
@@ -69,10 +70,12 @@ clangStdenv.mkDerivation rec {
     sourceRoot=''${sourceRoot}/source
   '';
 
-  cmakeFlags = [
+  cmakeFlags = let
+    soExt = if stdenv.isDarwin then "dylib" else "so";
+  in [
     "-DCMAKE_CXX_STANDARD=17"
-    "-DBLAS_LIBRARIES=${blas}/lib/libblas.so"
-    "-DLAPACK_LIBRARIES=${lapack}/lib/liblapack.so"
+    "-DBLAS_LIBRARIES=${blas}/lib/libblas.${soExt}"
+    "-DLAPACK_LIBRARIES=${lapack}/lib/liblapack.${soExt}"
   ];
 
   makeFlags = [
