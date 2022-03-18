@@ -3,7 +3,7 @@ rustPlatform.buildRustPackage rec {
     pname = "git-credential-keepassxc";
     version = "0.8.1";
 
-    buildInputs = lib.optionals (prev.targetPlatform.isDarwin)
+    buildInputs = lib.optionals (targetPlatform.isDarwin)
       (with darwin.apple_sdk.frameworks; [
         IOKit DiskArbitration Foundation
       ]);
@@ -26,4 +26,4 @@ rustPlatform.buildRustPackage rec {
     };
 
     doCheck = false;
-};
+}
