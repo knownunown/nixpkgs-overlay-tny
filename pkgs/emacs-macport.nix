@@ -1,5 +1,5 @@
 { lib, stdenv, fetchFromBitbucket, fetchurl, ncurses, pkg-config, texinfo, libxml2, gnutls, gettext, autoconf, automake, jansson
-, libgccjit
+, libgccjit, autoreconfHook
 , AppKit, Carbon, Cocoa, IOKit, OSAKit, Quartz, QuartzCore, WebKit, UniformTypeIdentifiers, Metal
 , ImageCaptureCore, GSS, ImageIO # These may be optional
 , sigtool
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
 
   enableParallelBuilding = true;
 
-  nativeBuildInputs = [ pkg-config autoconf automake sigtool ];
+  nativeBuildInputs = [ pkg-config autoreconfHook sigtool ];
 
   buildInputs = [ ncurses libxml2 gnutls texinfo gettext jansson
     AppKit Carbon Cocoa IOKit OSAKit Quartz QuartzCore WebKit UniformTypeIdentifiers
@@ -56,10 +56,6 @@ stdenv.mkDerivation rec {
     substituteInPlace src/Makefile.in \
       --replace 'RUN_TEMACS = ./temacs' 'RUN_TEMACS = env -i ./temacs'
   '';
-
-  makeFlags = [
-    "DESTDIR=$$out"
-  ];
 
   configureFlags = [
     "LDFLAGS=-L${ncurses.out}/lib"
