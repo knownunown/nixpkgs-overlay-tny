@@ -5,5 +5,12 @@
 
   discord = prev.callPackage ./pkgs/overrides/discord.nix { discord = prev.discord; };
 
+
+  emacsMacport = pkgs.callPackage ./pkgs/emacs-macport.nix {
+    inherit (pkgs.darwin.apple_sdk.frameworks)
+      AppKit Carbon Cocoa IOKit OSAKit Quartz QuartzCore WebKit UniformTypeIdentifiers Metal
+      ImageCaptureCore GSS ImageIO;
+    inherit (pkgs.darwin) sigtool;
+  };
   git-credential-keepassxc = pkgs.callPackage ./pkgs/git-credential-keepassxc.nix { };
 }
