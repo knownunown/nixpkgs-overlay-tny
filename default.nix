@@ -4,7 +4,9 @@
   nupack = pkgs.callPackage ./pkgs/nupack { inherit libsimdpp; tbb = tbb_2021; };
 
   discord = prev.callPackage ./pkgs/overrides/discord.nix { discord = prev.discord; };
-
+  # rocm-thunk = prev.callPackage ./pkgs/overrides/rocm-thunk.nix { rocm-thunk = prev.rocm-thunk; };
+  # compiler-rt = prev.callPackage ./pkgs/overrides/compiler-rt.nix { compiler-rt = prev.compiler-rt; };
+  sops-install-secrets = prev.callPackage ./pkgs/overrides/sops-install-secrets.nix { sops-install-secrets = prev.sops-install-secrets; };
 
   emacsMacport = pkgs.callPackage ./pkgs/emacs-macport.nix {
     inherit (pkgs.darwin.apple_sdk.frameworks)
@@ -13,4 +15,5 @@
     inherit (pkgs.darwin) sigtool;
   };
   git-credential-keepassxc = pkgs.callPackage ./pkgs/git-credential-keepassxc.nix { };
+  vivado = pkgs.callPackage ./pkgs/vivado.nix { };
 }
