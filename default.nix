@@ -4,7 +4,7 @@
   nupack = final.callPackage ./pkgs/nupack { libsimdpp = final.libsimdpp; tbb = final.tbb_2021; };
 
   discord = prev.callPackage ./pkgs/overrides/discord.nix { discord = prev.discord; };
-  emacsMacport = final.callPackage ./pkgs/overrides/emacs-macport.nix { inherit (prev) emacsMacport; };
+  emacsMacport = final.callPackage ./pkgs/overrides/emacs-macport/emacs-macport.nix { inherit (prev) emacsMacport; };
 
   # rocm-thunk = prev.callPackage ./pkgs/overrides/rocm-thunk.nix { rocm-thunk = prev.rocm-thunk; };
   sops-install-secrets = prev.callPackage ./pkgs/overrides/sops-install-secrets.nix { sops-install-secrets = prev.sops-install-secrets; };
