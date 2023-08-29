@@ -13,10 +13,10 @@ rustPlatform.buildRustPackage rec {
     owner = "Frederick888";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-JhJu2/dcHBe1CAdMTMxlA0jA/wYQG3EBtf9POVe9SAQ=";
+    hash = "sha256-siVSZke+anVTaLiJVyDEKvgX+VmS0axa+4721nlgmiw=";
   };
 
-  cargoSha256 = "sha256-fcPZ3ByxK/FZWY9i8CpEV6mruEcwcB2QjG4p50PEhBY=";
+  cargoSha256 = "sha256-QMAAKkjWgM/UiOfkNMLQxyGEYYmiSvE0Pd8fZXYyN48=";
 
   meta = with lib; {
     description = "Helper that allows Git (and shell scripts) to use KeePassXC as credential store";
