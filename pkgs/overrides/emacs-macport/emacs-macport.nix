@@ -1,4 +1,4 @@
-{ lib, fetchFromBitbucket, emacsMacport, llvmPackages_14, darwin }:
+{ lib, stdenv, fetchFromBitbucket, emacsMacport, llvmPackages_14, darwin }:
 let
   version = "29.1-mac-10.0";
 in
