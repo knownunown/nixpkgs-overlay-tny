@@ -1,6 +1,6 @@
 { final, prev, pkgs ? final, ... }:
 let
-  emacsMacport = final.callPackage ./pkgs/overrides/emacs-macport/emacs-macport.nix { inherit (prev) emacsMacport; };
+  emacs29-macport = final.callPackage ./pkgs/overrides/emacs-macport/emacs-macport.nix { inherit (prev) emacs29-macport; };
 in
 {
   libsimdpp = pkgs.callPackage ./pkgs/libsimdpp { };
@@ -9,8 +9,8 @@ in
 
   discord = prev.callPackage ./pkgs/overrides/discord.nix { discord = prev.discord; };
 
-  inherit emacsMacport;
-  emacsMacportDebug = pkgs.enableDebugging emacsMacport;
+  inherit emacs29-macport;
+  emacsMacportDebug = pkgs.enableDebugging emacs29-macport;
 
   lima = pkgs.callPackage ./pkgs/lima.nix { };
 
