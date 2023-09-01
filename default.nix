@@ -9,7 +9,6 @@ in
 
   discord = prev.callPackage ./pkgs/overrides/discord.nix { discord = prev.discord; };
 
-  inherit emacs29-macport;
   emacsMacportDebug = pkgs.enableDebugging emacs29-macport;
 
   lima = pkgs.callPackage ./pkgs/lima.nix { };
